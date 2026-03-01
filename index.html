@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suarez & Garcia | Contadora Pública</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-color: #ffffff;
+            --accent-color: #25d366; /* WhatsApp Green */
+            --text-color: #333;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--primary-gradient);
+            background-attachment: fixed;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        h1 { margin-bottom: 10px; color: #4a148c; }
+        p { margin-bottom: 20px; font-size: 0.9rem; }
+
+        /* Estilo de los servicios con flechitas */
+        .services-container {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .arrows { color: #764ba2; font-weight: bold; }
+
+        /* Formulario */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-family: inherit;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-whatsapp:hover { transform: scale(1.02); }
+
+        .btn-pdf {
+            display: inline-block;
+            margin-top: 15px;
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .vibras-logo { width: 40px; vertical-align: middle; }
+
+        /* Control invisible de suscripción */
+        #sub-check { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="suarez.PNG" alt="Logo Suarez & Garcia" class="logo">
+        
+        <h1>Caucasia</h1>
+        <p>Servicios Contables Profesionales</p>
+
+        <div class="services-container">
+            <strong>Nuestros Servicios:</strong>
+            <div class="service-item">
+                <span class="arrows">↑↓</span> <span>Declaración de Renta</span>
+            </div>
+            <div class="service-item">
+                <span class="arrows">↑↓</span> <span>Asesoría Tributaria</span>
+            </div>
+            <div class="service-item">
+                <span class="arrows">↑↓</span> <span>Contabilidad General</span>
+            </div>
+            <div class="service-item">
+                <span class="arrows">↑↓</span> <span>Auditoría Interna</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Nombre Completo</label>
+            <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+        </div>
+        <div class="input-group">
+            <label>Dirección</label>
+            <input type="text" id="direccion" placeholder="Ej: Barrio El Centro">
+        </div>
+        <div class="input-group">
+            <label>Celular</label>
+            <input type="tel" id="celular" placeholder="311...">
+        </div>
+        <div class="input-group">
+            <label>Observaciones/Servicio que requiere</label>
+            <textarea id="observaciones" rows="3"></textarea>
+        </div>
+
+        <input type="checkbox" id="sub-check" checked>
+
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">
+            Enviar a WhatsApp
+        </button>
+
+        <a href="suarez.pdf" target="_blank" class="btn-pdf">📄 Ver Catálogo Completo (PDF)</a>
+    </div>
+
+    <footer>
+        <p>App desarrollada por <strong>Vibras Positivas</strong> © 2026</p>
+        <p>Derechos Reservados</p>
+    </footer>
+
+    <script>
+        let userLocation = "No proporcionada";
+
+        // Obtener Geolocalización al cargar
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                userLocation = `https://www.google.com/maps?q=${lat},${lon}`;
+            });
+        }
+
+        function enviarWhatsApp() {
+            const nombre = document.getElementById('nombre').value;
+            const direccion = document.getElementById('direccion').value;
+            const celular = document.getElementById('celular').value;
+            const observaciones = document.getElementById('observaciones').value;
+            const suscrito = document.getElementById('sub-check').checked ? "Sí" : "No";
+
+            if (!nombre || !celular) {
+                alert("Por favor completa al menos nombre y celular.");
+                return;
+            }
+
+            const mensaje = `*NUEVO CLIENTE - SUAREZ & GARCIA*%0A` +
+                            `--------------------------------%0A` +
+                            `*Nombre:* ${nombre}%0A` +
+                            `*Dirección:* ${direccion}%0A` +
+                            `*Celular:* ${celular}%0A` +
+                            `*Observaciones:* ${observaciones}%0A` +
+                            `*Suscripción activa:* ${suscrito}%0A` +
+                            `*Ubicación del cliente:* ${userLocation}`;
+
+            const phone = "573117700111";
+            const url = `https://api.whatsapp.com/send?phone=${phone}&text=${mensaje}`;
+            
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
