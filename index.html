@@ -9,15 +9,11 @@
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --secondary-color: #ffffff;
-            --accent-color: #25d366; /* WhatsApp Green */
+            --accent-color: #25d366; 
             --text-color: #333;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -41,46 +37,60 @@
             text-align: center;
         }
 
-        .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
+        .logo { max-width: 160px; margin-bottom: 15px; }
+        h1 { color: #4a148c; font-size: 1.5rem; margin-bottom: 5px; }
+        .subtitle { margin-bottom: 25px; font-size: 0.9rem; color: #666; }
 
-        h1 { margin-bottom: 10px; color: #4a148c; }
-        p { margin-bottom: 20px; font-size: 0.9rem; }
-
-        /* Estilo de los servicios con flechitas */
-        .services-container {
-            background: #f3f4f6;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .service-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .arrows { color: #764ba2; font-weight: bold; }
-
-        /* Formulario */
+        /* Estilo del Cajón de Selección de Servicios */
         .input-group {
             margin-bottom: 15px;
             text-align: left;
         }
 
-        input, textarea {
+        label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #4a148c;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input, textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 5px;
+            border: 2px solid #eee;
+            border-radius: 10px;
             font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            background-color: white;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        /* Flechitas personalizadas para el select */
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '↑↓';
+            font-size: 0.8rem;
+            color: #764ba2;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-weight: bold;
+        }
+
+        select {
+            appearance: none;
+            cursor: pointer;
         }
 
         .btn-whatsapp {
@@ -93,32 +103,30 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             margin-top: 10px;
         }
 
-        .btn-whatsapp:hover { transform: scale(1.02); }
+        .btn-whatsapp:hover { transform: translateY(-2px); }
 
         .btn-pdf {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 20px;
             color: #764ba2;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            border-bottom: 1px dashed #764ba2;
         }
 
-        /* Footer */
         footer {
             margin-top: 30px;
             color: white;
             font-size: 0.8rem;
             text-align: center;
+            opacity: 0.9;
         }
 
-        .vibras-logo { width: 40px; vertical-align: middle; }
-
-        /* Control invisible de suscripción */
         #sub-check { display: none; }
     </style>
 </head>
@@ -127,93 +135,98 @@
     <div class="container">
         <img src="suarezygarcia.PNG" alt="Logo Suarez & Garcia" class="logo">
         
-        <h1>Caucasia</h1>
-        <p>Servicios Contables Profesionales</p>
+        <h1>CAUCASIA</h1>
+        <p class="subtitle">Asesoría Contable y Tributaria</p>
 
-        <div class="services-container">
-            <strong>Nuestros Servicios:</strong>
-            <div class="service-item">
-                <span class="arrows">↑↓</span> <span>Declaración de Renta</span>
-            </div>
-            <div class="service-item">
-                <span class="arrows">↑↓</span> <span>Asesoría Tributaria</span>
-            </div>
-            <div class="service-item">
-                <span class="arrows">↑↓</span> <span>Contabilidad General</span>
-            </div>
-            <div class="service-item">
-                <span class="arrows">↑↓</span> <span>Auditoría Interna</span>
+        <div class="input-group">
+            <label>Seleccione el Servicio que requiere</label>
+            <div class="select-wrapper">
+                <select id="servicio">
+                    <option value="No especificado">-- Toca para ver servicios --</option>
+                    <option value="Declaración de Renta Persona Natural">Declaración de Renta Persona Natural</option>
+                    <option value="Declaración de Renta Persona Jurídica">Declaración de Renta Persona Jurídica</option>
+                    <option value="Asesoría Tributaria y Fiscal">Asesoría Tributaria y Fiscal</option>
+                    <option value="Contabilidad para Negocios">Contabilidad para Negocios</option>
+                    <option value="Auditoría y Revisoría Fiscal">Auditoría y Revisoría Fiscal</option>
+                    <option value="Trámites ante la DIAN">Trámites ante la DIAN</option>
+                    <option value="Estados Financieros">Estados Financieros</option>
+                    <option value="Otro Servicio">Otro (Especificar en observaciones)</option>
+                </select>
             </div>
         </div>
 
         <div class="input-group">
             <label>Nombre Completo</label>
-            <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+            <input type="text" id="nombre" placeholder="Nombre del cliente">
         </div>
+
         <div class="input-group">
             <label>Dirección</label>
-            <input type="text" id="direccion" placeholder="Ej: Barrio El Centro">
+            <input type="text" id="direccion" placeholder="Dirección en Caucasia o ciudad">
         </div>
+
         <div class="input-group">
-            <label>Celular</label>
-            <input type="tel" id="celular" placeholder="311...">
+            <label>Número de Celular</label>
+            <input type="tel" id="celular" placeholder="Ej: 3117700111">
         </div>
+
         <div class="input-group">
-            <label>Observaciones/Servicio que requiere</label>
-            <textarea id="observaciones" rows="3"></textarea>
+            <label>Observaciones Adicionales</label>
+            <textarea id="observaciones" rows="2" placeholder="Cuéntenos más sobre su caso..."></textarea>
         </div>
 
         <input type="checkbox" id="sub-check" checked>
 
         <button class="btn-whatsapp" onclick="enviarWhatsApp()">
-            Enviar a WhatsApp
+            Enviar Solicitud por WhatsApp
         </button>
 
-        <a href="suarez.pdf" target="_blank" class="btn-pdf">📄 Ver Catálogo Completo (PDF)</a>
+        <a href="suarez.pdf" target="_blank" class="btn-pdf">📄 Ver Catálogo de Servicios (PDF)</a>
     </div>
 
     <footer>
         <p>App desarrollada por <strong>Vibras Positivas</strong> © 2026</p>
-        <p>Derechos Reservados</p>
+        <p>Todos los derechos reservados</p>
     </footer>
 
     <script>
-        let userLocation = "No proporcionada";
+        let userLocation = "No permitida por el usuario";
 
-        // Obtener Geolocalización al cargar
+        // Captura automática de ubicación
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 userLocation = `https://www.google.com/maps?q=${lat},${lon}`;
+            }, () => {
+                userLocation = "Ubicación no disponible (GPS desactivado)";
             });
         }
 
         function enviarWhatsApp() {
+            const servicio = document.getElementById('servicio').value;
             const nombre = document.getElementById('nombre').value;
             const direccion = document.getElementById('direccion').value;
             const celular = document.getElementById('celular').value;
             const observaciones = document.getElementById('observaciones').value;
-            const suscrito = document.getElementById('sub-check').checked ? "Sí" : "No";
 
             if (!nombre || !celular) {
-                alert("Por favor completa al menos nombre y celular.");
+                alert("Por favor ingrese su nombre y número de contacto.");
                 return;
             }
 
-            const mensaje = `*NUEVO CLIENTE - SUAREZ & GARCIA*%0A` +
+            const mensaje = `*NUEVA CONSULTA - SUAREZ & GARCIA*%0A` +
                             `--------------------------------%0A` +
-                            `*Nombre:* ${nombre}%0A` +
+                            `*Servicio:* ${servicio}%0A` +
+                            `*Cliente:* ${nombre}%0A` +
                             `*Dirección:* ${direccion}%0A` +
-                            `*Celular:* ${celular}%0A` +
+                            `*WhatsApp:* ${celular}%0A` +
                             `*Observaciones:* ${observaciones}%0A` +
-                            `*Suscripción activa:* ${suscrito}%0A` +
-                            `*Ubicación del cliente:* ${userLocation}`;
+                            `--------------------------------%0A` +
+                            `*Ubicación:* ${userLocation}`;
 
             const phone = "573117700111";
-            const url = `https://api.whatsapp.com/send?phone=${phone}&text=${mensaje}`;
-            
-            window.open(url, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${mensaje}`, '_blank');
         }
     </script>
 </body>
