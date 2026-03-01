@@ -8,7 +8,6 @@
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-color: #ffffff;
             --accent-color: #25d366; 
             --text-color: #333;
         }
@@ -38,10 +37,9 @@
         }
 
         .logo { max-width: 160px; margin-bottom: 15px; }
-        h1 { color: #4a148c; font-size: 1.5rem; margin-bottom: 5px; }
-        .subtitle { margin-bottom: 25px; font-size: 0.9rem; color: #666; }
+        h1 { color: #4a148c; font-size: 1.6rem; margin-bottom: 5px; }
+        .subtitle { margin-bottom: 25px; font-size: 0.9rem; color: #666; font-weight: 400; }
 
-        /* Estilo del Cajón de Selección de Servicios */
         .input-group {
             margin-bottom: 15px;
             text-align: left;
@@ -62,20 +60,11 @@
             border-radius: 10px;
             font-family: inherit;
             font-size: 0.95rem;
-            transition: border-color 0.3s;
             background-color: white;
         }
 
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: #764ba2;
-        }
-
-        /* Flechitas personalizadas para el select */
-        .select-wrapper {
-            position: relative;
-        }
-
+        /* Estilo para las flechitas del cajón de servicios */
+        .select-wrapper { position: relative; }
         .select-wrapper::after {
             content: '↑↓';
             font-size: 0.8rem;
@@ -87,27 +76,24 @@
             pointer-events: none;
             font-weight: bold;
         }
-
-        select {
-            appearance: none;
-            cursor: pointer;
-        }
+        select { appearance: none; cursor: pointer; }
 
         .btn-whatsapp {
             background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             margin-top: 10px;
+            transition: 0.3s;
         }
 
-        .btn-whatsapp:hover { transform: translateY(-2px); }
+        .btn-whatsapp:hover { background-color: #1ebe57; transform: translateY(-2px); }
 
         .btn-pdf {
             display: inline-block;
@@ -116,7 +102,6 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.85rem;
-            border-bottom: 1px dashed #764ba2;
         }
 
         footer {
@@ -124,7 +109,6 @@
             color: white;
             font-size: 0.8rem;
             text-align: center;
-            opacity: 0.9;
         }
 
         #sub-check { display: none; }
@@ -136,33 +120,31 @@
         <img src="suarezygarcia.PNG" alt="Logo Suarez & Garcia" class="logo">
         
         <h1>CAUCASIA</h1>
-        <p class="subtitle">Asesoría Contable y Tributaria</p>
+        <p class="subtitle">Servicios Contables Profesionales</p>
 
         <div class="input-group">
-            <label>Seleccione el Servicio que requiere</label>
+            <label>¿Qué servicio necesita?</label>
             <div class="select-wrapper">
                 <select id="servicio">
-                    <option value="No especificado">-- Toca para ver servicios --</option>
-                    <option value="Declaración de Renta Persona Natural">Declaración de Renta Persona Natural</option>
-                    <option value="Declaración de Renta Persona Jurídica">Declaración de Renta Persona Jurídica</option>
-                    <option value="Asesoría Tributaria y Fiscal">Asesoría Tributaria y Fiscal</option>
-                    <option value="Contabilidad para Negocios">Contabilidad para Negocios</option>
-                    <option value="Auditoría y Revisoría Fiscal">Auditoría y Revisoría Fiscal</option>
-                    <option value="Trámites ante la DIAN">Trámites ante la DIAN</option>
+                    <option value="No especificado">-- Seleccione aquí ↑↓ --</option>
+                    <option value="Declaración de Renta">Declaración de Renta</option>
+                    <option value="Asesoría Tributaria">Asesoría Tributaria</option>
+                    <option value="Contabilidad General">Contabilidad General</option>
+                    <option value="Auditoría Interna">Auditoría Interna</option>
                     <option value="Estados Financieros">Estados Financieros</option>
-                    <option value="Otro Servicio">Otro (Especificar en observaciones)</option>
+                    <option value="Trámites DIAN / RUT">Trámites DIAN / RUT</option>
                 </select>
             </div>
         </div>
 
         <div class="input-group">
             <label>Nombre Completo</label>
-            <input type="text" id="nombre" placeholder="Nombre del cliente">
+            <input type="text" id="nombre" placeholder="Nombre del interesado">
         </div>
 
         <div class="input-group">
             <label>Dirección</label>
-            <input type="text" id="direccion" placeholder="Dirección en Caucasia o ciudad">
+            <input type="text" id="direccion" placeholder="Barrio / Ciudad">
         </div>
 
         <div class="input-group">
@@ -171,62 +153,70 @@
         </div>
 
         <div class="input-group">
-            <label>Observaciones Adicionales</label>
-            <textarea id="observaciones" rows="2" placeholder="Cuéntenos más sobre su caso..."></textarea>
+            <label>Observaciones</label>
+            <textarea id="observaciones" rows="2" placeholder="Detalles adicionales..."></textarea>
         </div>
 
         <input type="checkbox" id="sub-check" checked>
 
         <button class="btn-whatsapp" onclick="enviarWhatsApp()">
-            Enviar Solicitud por WhatsApp
+            Enviar Datos Completos
         </button>
 
-        <a href="suarez.pdf" target="_blank" class="btn-pdf">📄 Ver Catálogo de Servicios (PDF)</a>
+        <a href="suarez.pdf" target="_blank" class="btn-pdf">📄 Ver Catálogo (PDF)</a>
     </div>
 
     <footer>
         <p>App desarrollada por <strong>Vibras Positivas</strong> © 2026</p>
-        <p>Todos los derechos reservados</p>
+        <p>Derechos Reservados</p>
     </footer>
 
     <script>
-        let userLocation = "No permitida por el usuario";
+        let userLocation = "No proporcionada";
 
-        // Captura automática de ubicación
+        // Captura de geolocalización
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
+                // Enlace directo a Google Maps
                 userLocation = `https://www.google.com/maps?q=${lat},${lon}`;
             }, () => {
-                userLocation = "Ubicación no disponible (GPS desactivado)";
+                userLocation = "El usuario no activó el GPS";
             });
         }
 
         function enviarWhatsApp() {
+            // Captura de datos de los cajones
             const servicio = document.getElementById('servicio').value;
             const nombre = document.getElementById('nombre').value;
             const direccion = document.getElementById('direccion').value;
             const celular = document.getElementById('celular').value;
             const observaciones = document.getElementById('observaciones').value;
+            const suscrito = document.getElementById('sub-check').checked ? "ACTIVA" : "INACTIVA";
 
-            if (!nombre || !celular) {
-                alert("Por favor ingrese su nombre y número de contacto.");
+            // Validación básica
+            if (nombre === "" || celular === "") {
+                alert("Por favor, ingresa tu nombre y celular para contactarte.");
                 return;
             }
 
-            const mensaje = `*NUEVA CONSULTA - SUAREZ & GARCIA*%0A` +
-                            `--------------------------------%0A` +
-                            `*Servicio:* ${servicio}%0A` +
-                            `*Cliente:* ${nombre}%0A` +
-                            `*Dirección:* ${direccion}%0A` +
-                            `*WhatsApp:* ${celular}%0A` +
-                            `*Observaciones:* ${observaciones}%0A` +
-                            `--------------------------------%0A` +
-                            `*Ubicación:* ${userLocation}`;
+            // Construcción del mensaje con TODA la información
+            const mensaje = 
+                `*SOLICITUD DE SERVICIO CONTABLE*%0A` +
+                `*Suarez & Garcia - Caucasia*%0A%0A` +
+                `📌 *Servicio Requerido:* ${servicio}%0A` +
+                `👤 *Cliente:* ${nombre}%0A` +
+                `📍 *Dirección:* ${direccion}%0A` +
+                `📱 *Celular:* ${celular}%0A` +
+                `💬 *Observaciones:* ${observaciones}%0A` +
+                `✅ *Suscripción:* ${suscrito}%0A%0A` +
+                `🌍 *Ubicación del cliente:*%0A${userLocation}`;
 
             const phone = "573117700111";
-            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${mensaje}`, '_blank');
+            const url = `https://api.whatsapp.com/send?phone=${phone}&text=${mensaje}`;
+            
+            window.open(url, '_blank');
         }
     </script>
 </body>
