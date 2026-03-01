@@ -63,7 +63,6 @@
             background-color: white;
         }
 
-        /* Estilo para las flechitas del cajón de servicios */
         .select-wrapper { position: relative; }
         .select-wrapper::after {
             content: '↑↓';
@@ -172,22 +171,21 @@
     </footer>
 
     <script>
-        let userLocation = "No proporcionada";
+        let userLocation = "Ubicación no proporcionada";
 
-        // Captura de geolocalización
+        // Captura de geolocalización corregida
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-                // Enlace directo a Google Maps
+                // Enlace funcional para abrir en Google Maps
                 userLocation = `https://www.google.com/maps?q=${lat},${lon}`;
-            }, () => {
-                userLocation = "El usuario no activó el GPS";
+            }, (error) => {
+                userLocation = "El usuario denegó el acceso al GPS";
             });
         }
 
         function enviarWhatsApp() {
-            // Captura de datos de los cajones
             const servicio = document.getElementById('servicio').value;
             const nombre = document.getElementById('nombre').value;
             const direccion = document.getElementById('direccion').value;
@@ -195,23 +193,22 @@
             const observaciones = document.getElementById('observaciones').value;
             const suscrito = document.getElementById('sub-check').checked ? "ACTIVA" : "INACTIVA";
 
-            // Validación básica
-            if (nombre === "" || celular === "") {
+            if (nombre.trim() === "" || celular.trim() === "") {
                 alert("Por favor, ingresa tu nombre y celular para contactarte.");
                 return;
             }
 
-            // Construcción del mensaje con TODA la información
+            // Mensaje formateado para que llegue toda la información clara
             const mensaje = 
                 `*SOLICITUD DE SERVICIO CONTABLE*%0A` +
-                `*Suarez & Garcia - Caucasia*%0A%0A` +
+                `*Suarez %26 Garcia - Caucasia*%0A%0A` +
                 `📌 *Servicio Requerido:* ${servicio}%0A` +
                 `👤 *Cliente:* ${nombre}%0A` +
                 `📍 *Dirección:* ${direccion}%0A` +
                 `📱 *Celular:* ${celular}%0A` +
                 `💬 *Observaciones:* ${observaciones}%0A` +
                 `✅ *Suscripción:* ${suscrito}%0A%0A` +
-                `🌍 *Ubicación del cliente:*%0A${userLocation}`;
+                `🌍 *Mapa de ubicación:*%0A${userLocation}`;
 
             const phone = "573117700111";
             const url = `https://api.whatsapp.com/send?phone=${phone}&text=${mensaje}`;
